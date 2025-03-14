@@ -36,7 +36,8 @@ class ComponentSettings implements \TYPO3\CMS\Core\SingletonInterface, ArrayAcce
             // settings with the correct typoscript from the current request.
             // The "reset()" method should be removed then as a "clean" component settings object should always be
             // created by the factory.
-            $typoScriptSettings = $GLOBALS['TYPO3_REQUEST']?->getAttribute('frontend.typoscript')->getSetupArray()['config.']['tx_fluidcomponents.']['settings.'] ?? [];
+            $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+            $typoScriptSettings = $request?->getAttribute('frontend.typoscript')->getSetupArray()['config.']['tx_fluidcomponents.']['settings.'] ?? [];
         }
         $this->settings = array_merge(
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['fluid_components']['settings'] ?? [],
